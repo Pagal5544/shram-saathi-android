@@ -136,7 +136,8 @@ Work in this order. Do not mark a milestone complete until code, tests and docum
 - Initial Alembic migration; PostGIS extension is enabled by the migration.
 - Health endpoints for API and database/PostGIS.
 - Public read-only skills and open-job APIs with filtering and pagination.
-- Seven automated tests covering health and marketplace read endpoints.
+- Idempotent Hindi/English starter catalogue seed script (12 categories, 26 skills).
+- Eight automated tests covering health, marketplace read endpoints and idempotent skill seeding.
 - GitHub Actions CI: temporary PostGIS database, migration application, migration/model consistency check and pytest.
 
 ### Not yet implemented
