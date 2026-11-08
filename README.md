@@ -42,7 +42,7 @@ Backend development is isolated on `backend/foundation`. The implementation plan
 - [Backend README and free-first roadmap](https://github.com/Pagal5544/shram-saathi-android/blob/backend/foundation/backend/README.md)
 - [Backend CI workflow](https://github.com/Pagal5544/shram-saathi-android/blob/backend/foundation/.github/workflows/backend-ci.yml)
 
-**Status:** Foundation scaffold and free-first documentation only. The API service, database configuration, initial marketplace models and health checks are scaffolded. Full authentication, authorization, CRUD APIs, migrations, matching, offers, bookings, chat and production deployment remain pending. Do not expose it publicly as a production service.
+**Status:** Initial free core milestone implemented: FastAPI service, PostgreSQL/PostGIS schema migration, health checks, and public read-only Skills/Open Jobs APIs. Authentication, authorization, protected write APIs, worker matching, offers, bookings, chat and production deployment remain pending. CI validates the migration and API tests. Do not expose it publicly as a production service.
 
 ## Android build
 
