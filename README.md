@@ -2,11 +2,27 @@
 
 Android-first two-way local labour marketplace connecting workers with contractors and customers.
 
+<details>
+<summary><strong>Release status: v0.1.0 — UI prototype baseline locked</strong></summary>
+
+- Status: **Frozen baseline / reference build**
+- Android package: `com.shramsaathi.app`
+- Baseline source commit: `5d19ec153542d55a4832582899430721232dbdb2`
+- Verified GitHub Actions run: [#42490089853](https://github.com/Pagal5544/shram-saathi-android/actions/runs/42490089853)
+- Build result: **Success**
+- Artifact: `shram-saathi-debug-apk`
+- Artifact ID: `13621108328`
+- Build type: Debug APK (not a Play Store release)
+
+The v0.1.0 baseline is preserved as a reference. Future development should continue on `main` or a new development branch; do not make feature changes directly to the locked release snapshot.
+
+</details>
+
 ## Android prototype v0.1.0
 
 This repository includes a native Kotlin + Jetpack Compose prototype.
 
-### Included in this first UI build
+### Included in this UI build
 - Worker / Hiring role switch
 - Hindi / English UI text switch
 - Six-tab navigation: Home, Jobs, Post, Workers, Messages, Profile
@@ -16,16 +32,16 @@ This repository includes a native Kotlin + Jetpack Compose prototype.
 - Profile, inbox and basic marketplace sample data
 - Shram Saathi green and orange visual identity
 
-> This is a UI prototype. Authentication, backend APIs, database persistence, real maps, live chat, notifications and real applications/bookings are not connected yet. Sample profiles and jobs are demonstration data only.
+> **Prototype limitation:** Authentication/OTP, backend APIs, database persistence, live maps, live chat, notifications and real applications/bookings are not connected. Sample profiles and jobs are demonstration data only.
 
 ## Build
 
 Requirements:
-- Android Studio with Android SDK 35
+- Android SDK 35
 - JDK 17
-- Gradle 8.9 (or use Android Studio's Gradle sync)
+- Gradle 8.9
 
-Open this repository in Android Studio and run the `app` configuration, or from the project root run:
+From the project root:
 
 ```bash
 gradle assembleDebug
@@ -37,11 +53,19 @@ APK output:
 app/build/outputs/apk/debug/app-debug.apk
 ```
 
+The GitHub Actions workflow builds the debug APK and uploads it as the `shram-saathi-debug-apk` artifact.
+
 ## Package
 
-`in.shramsaathi.app`
+`com.shramsaathi.app`
 
 ## Product and UI documentation
 
 - [Product blueprint](BLUEPRINT.md)
 - [UI/UX design specification](docs/UI_UX_DESIGN.md)
+
+## Versioning policy
+
+- `v0.1.0` is the locked UI prototype baseline.
+- New features and fixes should be developed on `main` or feature branches.
+- Update this README and create a new versioned snapshot when a future baseline is approved.
