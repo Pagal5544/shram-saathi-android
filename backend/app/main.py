@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import text
+
+from app.api.routes import router as marketplace_router
 from app.core.config import settings
 from app.core.database import engine
 
@@ -17,6 +19,8 @@ app.add_middleware(
     allow_methods=["GET", "POST", "PATCH", "PUT", "DELETE"],
     allow_headers=["Authorization", "Content-Type"],
 )
+
+app.include_router(marketplace_router)
 
 
 @app.get("/", tags=["system"])
