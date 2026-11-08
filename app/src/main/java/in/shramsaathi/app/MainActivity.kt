@@ -1,4 +1,4 @@
-package in.shramsaathi.app
+package com.shramsaathi.app
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
