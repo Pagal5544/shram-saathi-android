@@ -11,6 +11,8 @@ The Android client now includes a Hindi-first phone number and OTP login screen.
 5. Download `google-services.json` and place it at `app/google-services.json`. This file is intentionally not committed.
 6. Configure allowed SMS regions and review Firebase phone-authentication quotas/pricing for the intended region.
 
+For GitHub Actions builds, add repository Actions secrets named `GOOGLE_SERVICES_JSON` (the complete JSON file contents) and `SHRAM_API_BASE_URL` (the HTTPS backend base URL). The workflow injects the JSON only during the build; it is not committed to Git.
+
 ## Configure the backend URL
 
 Set the Gradle project property `SHRAM_API_BASE_URL` to the HTTPS base URL of the deployed Shram Saathi API. For both emulator and physical-device testing, use a reachable HTTPS API URL (for example, a temporary HTTPS tunnel to a local development server). Production must always use HTTPS.
