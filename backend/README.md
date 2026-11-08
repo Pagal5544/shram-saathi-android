@@ -183,6 +183,12 @@ Apply database migrations:
 alembic upgrade head
 ```
 
+Load the starter Hindi/English skill catalogue:
+
+```bash
+python -m scripts.seed_catalog
+```
+
 Start the API:
 
 ```bash
