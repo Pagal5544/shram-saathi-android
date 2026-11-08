@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "in.shramsaathi.app"
+    namespace = "com.shramsaathi.app"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "in.shramsaathi.app"
+        applicationId = "com.shramsaathi.app"
         minSdk = 24
         targetSdk = 35
         versionCode = 1
