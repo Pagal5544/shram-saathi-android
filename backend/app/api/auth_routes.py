@@ -80,6 +80,8 @@ def register_worker(
         if payload.expected_min_amount > payload.expected_max_amount:
             raise HTTPException(status_code=422, detail="Minimum wage cannot exceed maximum wage")
 
+    if len(payload.skill_ids) != len(set(payload.skill_ids)):
+        raise HTTPException(status_code=422, detail="Duplicate skill IDs are not allowed")
     skills = list(db.scalars(select(Skill).where(
         Skill.id.in_(payload.skill_ids), Skill.is_active.is_(True)
     )))
