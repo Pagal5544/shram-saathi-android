@@ -34,15 +34,15 @@ This repository includes a native Kotlin + Jetpack Compose prototype.
 
 > **Prototype limitation:** The Android UI is not yet connected to live authentication, backend APIs, database persistence, maps, chat, notifications or real applications/bookings. Sample profiles and jobs are demonstration data only.
 
-## Backend foundation
+## Backend foundation — free-first development
 
-The first FastAPI + PostgreSQL/PostGIS backend scaffold is available on the development branch:
+Backend development is isolated on `backend/foundation`. The implementation plan prioritizes free and open-source technologies and defers paid infrastructure and provider integrations until they are genuinely needed.
 
-- [Backend source — backend/foundation](https://github.com/Pagal5544/shram-saathi-android/tree/backend/foundation/backend)
-- [Backend setup and API notes](https://github.com/Pagal5544/shram-saathi-android/blob/backend/foundation/backend/README.md)
+- [Backend source](https://github.com/Pagal5544/shram-saathi-android/tree/backend/foundation/backend)
+- [Backend README and free-first roadmap](https://github.com/Pagal5544/shram-saathi-android/blob/backend/foundation/backend/README.md)
 - [Backend CI workflow](https://github.com/Pagal5544/shram-saathi-android/blob/backend/foundation/.github/workflows/backend-ci.yml)
 
-**Status:** Foundation scaffold only. It includes the API service, database configuration, initial marketplace models and health checks. OTP authentication, authorization, API CRUD, migrations, matching, offers, bookings and production deployment are still pending. Do not expose it publicly as a production service.
+**Status:** Foundation scaffold and free-first documentation only. The API service, database configuration, initial marketplace models and health checks are scaffolded. Full authentication, authorization, CRUD APIs, migrations, matching, offers, bookings, chat and production deployment remain pending. Do not expose it publicly as a production service.
 
 ## Android build
 
@@ -78,5 +78,5 @@ The Android GitHub Actions workflow builds the debug APK and uploads it as the `
 
 - `v0.1.0` is the locked UI prototype baseline.
 - Backend development is isolated on `backend/foundation` until the foundation is reviewed.
-- New Android features should be developed on `main` or feature branches.
+- New Android features should be developed on the main branch or feature branches.
 - Update the README and create a new versioned snapshot when a future baseline is approved.
