@@ -181,6 +181,12 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
+Apply database migrations:
+
+```bash
+alembic upgrade head
+```
+
 Start the API:
 
 ```bash
