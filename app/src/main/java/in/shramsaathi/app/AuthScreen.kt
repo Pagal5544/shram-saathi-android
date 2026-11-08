@@ -93,7 +93,7 @@ fun AuthScreen(onLoginSuccess: () -> Unit) {
                                 val responseText = response.body?.string().orEmpty()
                                 if (!response.isSuccessful) {
                                     val detail = try { JSONObject(responseText).optString("detail") } catch (_: Exception) { "" }
-                                    throw IllegalStateException(detail.ifBlank { "Backend login failed (\${response.code})" })
+                                    throw IllegalStateException(detail.ifBlank { "Backend login failed (" + response.code + ")" })
                                 }
                                 val session = JSONObject(responseText)
                                 val token = session.getString("access_token")
