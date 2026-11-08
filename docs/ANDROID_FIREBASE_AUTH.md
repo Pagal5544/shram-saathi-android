@@ -13,12 +13,12 @@ The Android client now includes a Hindi-first phone number and OTP login screen.
 
 ## Configure the backend URL
 
-Set the Gradle project property `SHRAM_API_BASE_URL` to the HTTPS base URL of the deployed Shram Saathi API. For local emulator development, the Android emulator can reach a host machine at `http://10.0.2.2:8000`; use this only in a local debug configuration. A physical Android phone needs a reachable LAN/tunnel URL. Production must use HTTPS.
+Set the Gradle project property `SHRAM_API_BASE_URL` to the HTTPS base URL of the deployed Shram Saathi API. For both emulator and physical-device testing, use a reachable HTTPS API URL (for example, a temporary HTTPS tunnel to a local development server). Production must always use HTTPS.
 
 Example local invocation:
 
 ```bash
-gradle assembleDebug -PSHRAM_API_BASE_URL=http://10.0.2.2:8000
+gradle assembleDebug -PSHRAM_API_BASE_URL=https://your-https-api-host
 ```
 
 The app keeps login disabled if Firebase configuration or the API base URL is missing.
