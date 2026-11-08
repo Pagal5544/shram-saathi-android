@@ -1,4 +1,5 @@
 from functools import lru_cache
+
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -8,6 +9,9 @@ class Settings(BaseSettings):
     api_v1_prefix: str = "/api/v1"
     database_url: str = "postgresql+psycopg://shram:shram_dev_password@localhost:5432/shram_saathi"
     cors_origins: str = "http://localhost:3000"
+    firebase_service_account_json: str = ""
+    jwt_secret_key: str = ""
+    access_token_minutes: int = 30
 
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
