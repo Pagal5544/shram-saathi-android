@@ -3,8 +3,8 @@
 Free-first backend foundation for the Shram Saathi Android app.
 
 **Development branch:** `backend/foundation`  
-**Current milestone:** Documentation and implementation roadmap  
-**Status:** Foundation scaffold only — not production-ready.
+**Current milestone:** Free core API + initial database migration  
+**Status:** Initial read-only marketplace API and migration are implemented; still not production-ready.
 
 The project will use free and open-source software wherever practical. Paid third-party services will not be introduced during the initial development unless a feature cannot be implemented safely without them.
 
@@ -129,7 +129,7 @@ Work in this order. Do not mark a milestone complete until code, tests and docum
 
 ## 5. Current implementation status
 
-### Already scaffolded
+### Implemented
 - FastAPI application entry point.
 - Environment-based settings.
 - SQLAlchemy database setup.
@@ -138,18 +138,20 @@ Work in this order. Do not mark a milestone complete until code, tests and docum
 - Health endpoints:
   - `GET /api/v1/health`
   - `GET /api/v1/health/database`
-- Starter pytest health test.
+- Public read-only skills and open-job APIs with filters and pagination.
+- Initial Alembic migration for PostgreSQL/PostGIS.
+- Tests for system health and marketplace read endpoints.
 - Backend GitHub Actions workflow.
 
 ### Not yet implemented / not yet verified
-- Complete Alembic migration history.
+- Authentication, OTP and authorization.
 - Production authentication, OTP and authorization.
 - CRUD APIs for marketplace entities.
-- Search, matching and geospatial API behavior.
+- Worker discovery and geospatial matching APIs.
 - Offers, bookings, chat and notifications.
 - Ratings, reports and blocking APIs.
 - Production hosting, secrets, backups and monitoring.
-- A verified green backend CI run.
+- Production authentication, authorization, CRUD writes, chat and bookings.
 
 Do not describe this scaffold as a completed backend and do not expose it publicly.
 
