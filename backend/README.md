@@ -277,3 +277,22 @@ The backend CI workflow starts a temporary PostGIS database, applies migrations,
 ## Docker Compose note
 
 The API container connects to the Compose database service using hostname `db`. The local `.env.example` URL is intended for running the API directly on the host; Compose overrides it for the API container.
+
+
+## Firebase phone authentication and profiles (backend milestone 2)
+
+Implemented on `backend/foundation`:
+
+- `POST /api/v1/auth/firebase`: verifies a Firebase ID token, confirms the Firebase account has an assigned verified phone number, then creates/loads the local account and returns a short-lived Shram Saathi bearer token.
+- `POST /api/v1/profiles/worker`: protected worker profile registration/update, including locality, travel radius, availability and selected skills.
+- `POST /api/v1/profiles/employer`: protected hiring profile registration/update. A user may hold both worker and hiring roles.
+
+### Required environment values
+
+Set `FIREBASE_SERVICE_ACCOUNT_JSON` to the Firebase service-account JSON and `JWT_SECRET_KEY` to a random secret of at least 32 characters. Never commit either value. The backend uses Firebase Admin only to verify identity; Firebase SMS delivery is performed by the Android Firebase Authentication SDK and may have quotas or charges depending on usage and region.
+
+See [README_AUTH.md](README_AUTH.md) for the client/server flow and Firebase setup checklist.
+
+### Current security boundary
+
+This is an integration milestone, not a production launch. Access tokens are short-lived, but refresh-token rotation/revocation, endpoint rate limits, device/session management, abuse monitoring and a full security review remain outstanding. The Android Firebase sign-in UI and live Firebase project configuration are not yet wired.
