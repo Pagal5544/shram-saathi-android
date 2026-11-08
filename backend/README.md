@@ -130,30 +130,24 @@ Work in this order. Do not mark a milestone complete until code, tests and docum
 ## 5. Current implementation status
 
 ### Implemented
-- FastAPI application entry point.
-- Environment-based settings.
-- SQLAlchemy database setup.
-- Initial models for users, roles, worker/employer profiles, skills, jobs and applications.
-- PostgreSQL/PostGIS Docker Compose configuration.
-- Health endpoints:
-  - `GET /api/v1/health`
-  - `GET /api/v1/health/database`
-- Public read-only skills and open-job APIs with filters and pagination.
-- Initial Alembic migration for PostgreSQL/PostGIS.
-- Tests for system health and marketplace read endpoints.
-- Backend GitHub Actions workflow.
+- FastAPI application entry point and environment-based settings.
+- SQLAlchemy models for users, roles, worker/employer profiles, skills, jobs and applications.
+- PostgreSQL/PostGIS Docker Compose development database.
+- Initial Alembic migration; PostGIS extension is enabled by the migration.
+- Health endpoints for API and database/PostGIS.
+- Public read-only skills and open-job APIs with filtering and pagination.
+- Seven automated tests covering health and marketplace read endpoints.
+- GitHub Actions CI: temporary PostGIS database, migration application, migration/model consistency check and pytest.
 
-### Not yet implemented / not yet verified
-- Authentication, OTP and authorization.
-- Production authentication, OTP and authorization.
-- CRUD APIs for marketplace entities.
-- Worker discovery and geospatial matching APIs.
-- Offers, bookings, chat and notifications.
-- Ratings, reports and blocking APIs.
-- Production hosting, secrets, backups and monitoring.
-- Production authentication, authorization, CRUD writes, chat and bookings.
+### Not yet implemented
+- Phone OTP authentication, access/refresh token lifecycle and authorization.
+- Protected profile, job creation/editing, application and invitation APIs.
+- Worker discovery and geospatial matching.
+- Offers, negotiation state machine and bookings.
+- Chat, push notifications, ratings, reports and blocking.
+- Production hosting, production secrets, backups and monitoring.
 
-Do not describe this scaffold as a completed backend and do not expose it publicly.
+The backend is not production-ready. Do not expose it publicly until authentication, authorization, protected writes, rate limits and security review are complete.
 
 ## 6. Run locally
 
