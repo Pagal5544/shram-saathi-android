@@ -2,7 +2,6 @@
 import json
 import threading
 from datetime import datetime, timedelta, timezone
-from functools import lru_cache
 from uuid import UUID
 
 import firebase_admin
@@ -43,7 +42,7 @@ def _firebase_app():
 
 
 def verify_firebase_phone_token(id_token: str) -> tuple[str, str]:
-    """Return Firebase UID and a verified E.164 phone number."""
+    """Return Firebase UID and its phone number, which Firebase assigns after verification."""
     _firebase_app()
     try:
         decoded = firebase_auth.verify_id_token(id_token, check_revoked=True)
@@ -55,7 +54,7 @@ def verify_firebase_phone_token(id_token: str) -> tuple[str, str]:
         ) from exc
 
     phone = firebase_user.phone_number
-    if not phone or not firebase_user.phone_number_verified:
+    if not phone:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="A verified phone number is required",
