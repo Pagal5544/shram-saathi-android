@@ -32,7 +32,7 @@ This repository includes a native Kotlin + Jetpack Compose prototype.
 - Profile, inbox and basic marketplace sample data
 - Shram Saathi green and orange visual identity
 
-> **Prototype limitation:** Authentication/OTP, backend APIs, database persistence, live maps, live chat, notifications and real applications/bookings are not connected. Sample profiles and jobs are demonstration data only.
+> **Marketplace prototype limitation:** Jobs, worker discovery, posting, chat, maps and bookings still use demo data. A separate feature branch now adds Firebase phone OTP sign-in and the backend token exchange; see [Android Firebase Auth setup](docs/ANDROID_FIREBASE_AUTH.md).
 
 ## Build
 
