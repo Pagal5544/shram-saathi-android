@@ -14,9 +14,25 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    services:
+      postgis:
+        image: postgis/postgis:16-3.4
+        env:
+          POSTGRES_DB: shram_saathi
+          POSTGRES_USER: shram
+          POSTGRES_PASSWORD: shram_test_password
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U shram -d shram_saathi"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
     defaults:
       run:
         working-directory: backend
+    env:
+      DATABASE_URL: postgresql+psycopg://shram:shram_test_password@localhost:5432/shram_saathi
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -26,5 +42,9 @@ jobs:
           cache-dependency-path: backend/requirements.txt
       - name: Install dependencies
         run: pip install -r requirements.txt
+      - name: Apply database migrations
+        run: alembic upgrade head
+      - name: Check model and migration consistency
+        run: alembic check
       - name: Run backend tests
         run: pytest -q
