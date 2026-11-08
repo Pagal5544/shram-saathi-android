@@ -5,6 +5,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 from app.core import auth
+from app.api import auth_routes
 from app.core.config import settings
 from app.core.database import get_db
 from app.main import app
@@ -17,7 +18,7 @@ def test_firebase_exchange_rejects_invalid_token(monkeypatch):
         from fastapi import HTTPException
         raise HTTPException(status_code=401, detail="Firebase ID token is invalid or expired")
 
-    monkeypatch.setattr(auth, "verify_firebase_phone_token", reject)
+    monkeypatch.setattr(auth_routes, "verify_firebase_phone_token", reject)
     response = client.post("/api/v1/auth/firebase", json={"id_token": "x" * 40})
     assert response.status_code == 401
 
