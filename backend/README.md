@@ -217,3 +217,54 @@ pytest
 - Backend development branch: `backend/foundation`
 - Product blueprint: [../../BLUEPRINT.md](../../BLUEPRINT.md)
 - UI/UX specification: [../../docs/UI_UX_DESIGN.md](../../docs/UI_UX_DESIGN.md)
+
+
+## Implemented public API endpoints
+
+These endpoints are read-only and use the PostgreSQL database:
+
+| Method | Endpoint | Purpose |
+|---|---|---|
+| GET | `/api/v1/health` | API health |
+| GET | `/api/v1/health/database` | PostgreSQL and PostGIS connectivity |
+| GET | `/api/v1/skills` | Active skills with category names |
+| GET | `/api/v1/jobs` | Open jobs with pagination |
+| GET | `/api/v1/jobs?district=Meerut` | Filter open jobs by district |
+| GET | `/api/v1/jobs?skill_id=<uuid>` | Filter open jobs by skill |
+| GET | `/api/v1/jobs/<job-uuid>` | One open job detail |
+
+The public job response intentionally excludes exact coordinates and private worker information. Write endpoints are not exposed until authentication and authorization are implemented.
+
+## Database migrations
+
+The initial Alembic migration creates the marketplace schema and enables the PostGIS extension.
+
+From the `backend` directory:
+
+```bash
+alembic upgrade head
+```
+
+Check whether model definitions and migration history are aligned:
+
+```bash
+alembic check
+```
+
+Create a future migration after changing models:
+
+```bash
+alembic revision --autogenerate -m "describe schema change"
+```
+
+Rollback the latest migration:
+
+```bash
+alembic downgrade -1
+```
+
+The backend CI workflow starts a temporary PostGIS database, applies migrations, checks migration/model consistency and runs tests. This is a disposable CI database, not a production database.
+
+## Docker Compose note
+
+The API container connects to the Compose database service using hostname `db`. The local `.env.example` URL is intended for running the API directly on the host; Compose overrides it for the API container.
