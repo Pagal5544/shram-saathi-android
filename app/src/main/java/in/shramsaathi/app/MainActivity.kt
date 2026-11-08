@@ -1,6 +1,7 @@
 package com.shramsaathi.app
 
 import android.os.Bundle
+import com.google.firebase.auth.FirebaseAuth
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
@@ -32,7 +33,24 @@ private val Muted = Color(0xFF737B76)
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent { ShramSaathiTheme { ShramSaathiApp() } }
+        val prefs = getSharedPreferences("shram_auth", MODE_PRIVATE)
+        val sessionValid = prefs.getLong("expires_at", 0L) > System.currentTimeMillis() &&
+            !prefs.getString("access_token", null).isNullOrBlank()
+        if (!sessionValid) prefs.edit().clear().apply()
+        setContent {
+            ShramSaathiTheme {
+                var loggedIn by remember { mutableStateOf(sessionValid) }
+                if (loggedIn) {
+                    ShramSaathiApp(onLogout = {
+                        getSharedPreferences("shram_auth", MODE_PRIVATE).edit().clear().apply()
+                        FirebaseAuth.getInstance().signOut()
+                        loggedIn = false
+                    })
+                } else {
+                    AuthScreen(onLoginSuccess = { loggedIn = true })
+                }
+            }
+        }
     }
 }
 
@@ -56,7 +74,7 @@ private enum class AppTab { HOME, JOBS, POST, WORKERS, MESSAGES, PROFILE }
 private enum class UserRole { WORKER, HIRING }
 
 @Composable
-private fun ShramSaathiApp() {
+private fun ShramSaathiApp(onLogout: () -> Unit) {
     var tab by remember { mutableStateOf(AppTab.HOME) }
     var role by remember { mutableStateOf(UserRole.WORKER) }
     var hindi by remember { mutableStateOf(true) }
@@ -149,7 +167,7 @@ private fun ShramSaathiApp() {
                 AppTab.POST -> PostScreen(role, hindi)
                 AppTab.WORKERS -> WorkersScreen(hindi, search) { search = it }
                 AppTab.MESSAGES -> MessagesScreen(hindi)
-                AppTab.PROFILE -> ProfileScreen(role, hindi, available)
+                AppTab.PROFILE -> ProfileScreen(role, hindi, available, onLogout)
             }
         }
     }
@@ -442,7 +460,7 @@ private fun MessagesScreen(hindi: Boolean) {
 }
 
 @Composable
-private fun ProfileScreen(role: UserRole, hindi: Boolean, available: Boolean) {
+private fun ProfileScreen(role: UserRole, hindi: Boolean, available: Boolean, onLogout: () -> Unit) {
     Column(Modifier.fillMaxSize().padding(16.dp)) {
         Card(colors = CardDefaults.cardColors(containerColor = Color.White), shape = RoundedCornerShape(18.dp)) {
             Row(Modifier.fillMaxWidth().padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
@@ -481,6 +499,10 @@ private fun ProfileScreen(role: UserRole, hindi: Boolean, available: Boolean) {
         Text(tr("भूमिका", "Active role", hindi), color = Muted, fontSize = 12.sp)
         Text(if (role == UserRole.WORKER) tr("कामगार", "Worker", hindi) else tr("काम देने वाले", "Hiring", hindi), fontWeight = FontWeight.Bold)
         Text(tr("उपलब्धता: ", "Availability: ", hindi) + if (available) tr("चालू", "On", hindi) else tr("बंद", "Off", hindi), color = Green, fontSize = 12.sp)
+        Spacer(Modifier.height(20.dp))
+        OutlinedButton(onClick = onLogout, modifier = Modifier.fillMaxWidth()) {
+            Text(tr("लॉगआउट", "Log out", hindi), color = Green)
+        }
     }
 }
 
