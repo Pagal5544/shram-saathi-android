@@ -4,11 +4,12 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
+from app.core.config import settings
 from app.core.database import get_db
 from app.models import EmployerProfile, Job, JobStatus, Skill, SkillCategory
 from app.schemas import JobPublic, PaginatedJobs, SkillPublic
 
-router = APIRouter(prefix="/api/v1", tags=["marketplace"])
+router = APIRouter(prefix=settings.api_v1_prefix, tags=["marketplace"])
 
 
 @router.get("/skills", response_model=list[SkillPublic])
