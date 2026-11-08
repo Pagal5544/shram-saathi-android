@@ -18,7 +18,7 @@ def test_firebase_exchange_rejects_invalid_token(monkeypatch):
         raise HTTPException(status_code=401, detail="Firebase ID token is invalid or expired")
 
     monkeypatch.setattr(auth, "verify_firebase_phone_token", reject)
-    response = client.post("/api/v1/auth/firebase", json={"id_token": "bad"})
+    response = client.post("/api/v1/auth/firebase", json={"id_token": "x" * 40})
     assert response.status_code == 401
 
 
