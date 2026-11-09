@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: shram-saathi-api
+    runtime: node
+    plan: free
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: FIREBASE_PROJECT_ID
+        value: shram-saathi-7e9a0
+      - key: FIREBASE_SERVICE_ACCOUNT_JSON
+        sync: false
+      - key: SHRAM_JWT_SECRET
+        generateValue: true
