@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "7713083521",
+    "project_id": "shram-saathi-7e9a0",
+    "storage_bucket": "shram-saathi-7e9a0.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:7713083521:android:3ef5614a25af4cfbdffd80",
+        "android_client_info": {
+          "package_name": "com.shramsaathi.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXZ483VRK96KwtG-UbYdf8LfPvEpHr4iQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
